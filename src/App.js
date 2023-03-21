@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Post from "./Components/Post";
 function App() {
@@ -22,9 +23,37 @@ function App() {
       </svg>
     );
   }
+
+  const [posts, setPosts] = useState([
+    {
+      userName: "Aditya",
+      imageURL:
+        "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350",
+      caption:
+        "Instagram clone made using react and firebase easy to use and can be used by anyone",
+    },
+    {
+      userName: "Upendra",
+      imageURL: "https://picsum.photos/200/300",
+      caption:
+        "Instagram clone made using react and firebase easy to use and can be used by anyone",
+    },
+    {
+      userName: "Vikash",
+      imageURL: "https://picsum.photos/seed/picsum/200/300",
+      caption:
+        "Instagram clone made using react and firebase easy to use and can be used by anyone",
+    },
+    {
+      userName: "Harshit",
+      imageURL: "https://picsum.photos/200/300?grayscale",
+      caption:
+        "Instagram clone made using react and firebase easy to use and can be used by anyone",
+    },
+  ]);
+
   return (
     <div className="App">
-
       {/* --------------Application Header-------------- */}
 
       <div className="app__header">
@@ -33,11 +62,7 @@ function App() {
 
       {/* ---------------------Body-------------------------- */}
 
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-
+      {posts.map((post)=> <Post userName={post.userName} imageURL={post.imageURL} caption={post.caption}  />)}
 
     </div>
   );
