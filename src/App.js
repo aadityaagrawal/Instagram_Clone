@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Components/Post";
-import { db } from "./Firebase";
+import { db, auth } from "./Firebase";
+import Modal from "@mui/material/Modal";
+import { Button, Input } from "@mui/material";
+import Box from "@mui/material/Box";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 function App() {
   function insta_logo() {
@@ -27,29 +42,78 @@ function App() {
   }
 
   const [posts, setPosts] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
-      setPosts(snapshot.docs.map(doc => ( {
-        id: doc.id, 
-        post: doc.data()
-      } )));
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          post: doc.data(),
+        }))
+      );
     });
   }, []);
 
+  const signUp = (e) => {
+    e.preventDefault();
+    auth.createUserWithEmailAndPassword(email,password)
+    .catch((error)=> alert(error.message))
+  };
+
   return (
     <div className="App">
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box sx={style}>
+          <form className="app__signup" action="">
+            <center>
+              <div className="app_headerImage">{insta_logo()}</div>
+            </center>
+            <Input
+              type="text"
+              placeholder="Username"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
+            />
+            <Input
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <Input
+              type="text"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            
+            <Button type="submit" onClick={signUp}>Sign Up</Button>
+          </form>
+        </Box>
+      </Modal>
+
       {/* --------------Application Header-------------- */}
 
       <div className="app__header">
         <div className="app_headerImage">{insta_logo()}</div>
       </div>
+      <Button onClick={() => setOpen(true)}>Sign Up</Button>
 
       {/* ---------------------Body-------------------------- */}
 
-      {
-      posts.map(({id, post}) => (
-        <Post key = {id}
+      {posts.map(({ id, post }) => (
+        <Post
+          key={id}
           userName={post.userName}
           imageURL={post.imageURL}
           caption={post.caption}
