@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Instagram Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an Instagram clone built using ReactJS, Firebase, and MaterialUI. It allows users to create their accounts, sign in, post images after they signed in, and comment on existing posts. The application has a responsive design that works on different screen sizes. The application is hosted using Firebase hosting.
 
-## Available Scripts
+## Demo 
+Here is a demo of the application: https://instagram-clone-react-6c599.firebaseapp.com/
 
-In the project directory, you can run:
 
-### `npm start`
+## Screenshots:
+### Before Sign-In :
+![image](https://user-images.githubusercontent.com/74168474/227580763-aa5b6003-a7e9-410c-81d6-49b7c0158d55.png)
+### After Sign-In : (User Can comment on existing post and add new posts)
+![image](https://user-images.githubusercontent.com/74168474/227581041-3e4fe13d-1c73-4e28-88ae-320e23294877.png)
+### Upload Section :
+![image](https://user-images.githubusercontent.com/74168474/227581120-7b6715a7-d5c3-4e41-8ebc-bdb6f5d11761.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features :
 
-### `npm test`
+The Instagram Clone application has the following features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. User Authentication: The application uses Firebase Authentication to allow users to create accounts and sign in. This ensures that only authenticated users can access the application and its features.
 
-### `npm run build`
+2. Create and Sign In to Accounts: Once authenticated, users can create their accounts and sign in to access the application's features.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Add Image Posts: Users can add image posts by clicking on the "Add Post" button and uploading an image. The application stores the images in Firebase Storage, and the post details in Firebase Realtime Database.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Comment on Existing Posts: Users can comment on existing posts by clicking on the "Comment" button and entering their comments in the form. The comments are stored in Firebase Realtime Database and displayed below the post.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Responsive Design: The application has a responsive design that works on different screen sizes. This is achieved using MaterialUI, which provides pre-built components for designing responsive user interfaces.
 
-### `npm run eject`
+The application's features allow users to create and share their posts with others, and to interact with other users by commenting on their posts. The application's responsive design ensures that users can access the application from any device, making it accessible to a wider audience.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technology Used: 
+The following technologies were used in building the application:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. ReactJS: A JavaScript library for building user interfaces.
+2. Firebase: A cloud-based platform for building mobile and web applications.
+3. MaterialUI: A popular React UI library that provides pre-built components for designing user interfaces.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Installation
+To install the application, follow the steps below:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Clone the repository: git clone https://github.com/aadityaagrawal/Instagram_Clone.git
+2. Install the dependencies: npm install
+3. Start the development server: npm start
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
+To use the application, follow the steps below:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create an account or sign in to an existing one.
+2. Add an image post by clicking the "Add Post" button and uploading an image.
+3. Comment on existing posts by clicking the "Comment" button and entering your comment in the form.
 
-### Code Splitting
+## Upcoming Features
+* Notificaitons for likes, comments, follows, etc
+* Caching of Profiles, Images, Etc.
+* Filters support for images
+* Videos support
+* Custom Camera Implementation
+* Heart Animation when liking image
+* Delete Posts
+* Stories
+* Send post to chats
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
