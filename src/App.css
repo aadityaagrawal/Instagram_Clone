@@ -6,6 +6,8 @@
   background-color: #fafafa;
 }
 .app__header{
+  position: sticky;
+  top: 0;
   padding: 20px;
   background-color: white;
   object-fit: contain;
@@ -24,4 +26,13 @@
 
 .app__post{
   padding: 20px;
+}
+
+.main__body{
+  display: flex;
+  justify-content: center;
+}
+
+.app__post{
+  margin-right: 20px;  
 }

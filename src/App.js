@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import { Button, Input } from "@mui/material";
 import Box from "@mui/material/Box";
 import ImageUpload from "./Components/ImageUpload";
-
+import { InstagramEmbed } from "react-social-media-embed";
 
 const style = {
   position: "absolute",
@@ -55,7 +55,7 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         //user has logged in
-        console.log(authUser,"logged in aditya");
+        console.log(authUser, "logged in aditya");
         // This keeps you logged in even one refresh the page.
         setUser(authUser);
       } else {
@@ -84,7 +84,7 @@ function App() {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        console.log(authUser)
+        console.log(authUser);
         return authUser.user.updateProfile({
           displayName: userName,
         });
@@ -92,8 +92,8 @@ function App() {
       .catch((error) => {
         alert(error.message);
         setOpen(true);
-      })
-      .then(() => setOpen(false));
+      });
+    setOpen(false);
   };
 
   const signIn = (e) => {
@@ -107,7 +107,6 @@ function App() {
 
   return (
     <div className="App">
-      
       <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
         <Box sx={style}>
           <form className="app__signup" action="">
@@ -146,6 +145,14 @@ function App() {
             </center>
             <Input
               type="text"
+              placeholder="user name"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
+            />
+            <Input
+              type="text"
               placeholder="email"
               value={email}
               onChange={(e) => {
@@ -173,38 +180,43 @@ function App() {
       <div className="app__header">
         <div className="app_headerImage">{insta_logo()}</div>
         {user ? (
-        <Button onClick={() => auth.signOut()}>Log Out</Button>
-      ) : (
-        <div className="app_loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
-        </div>
-      )}
+          <Button onClick={() => auth.signOut()}>Log Out</Button>
+        ) : (
+          <div className="app_loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       </div>
 
-      
-
       {/* ---------------------Body-------------------------- */}
-<div className="app__post">
-      {posts.map(({ id, post }) => (
-        <Post
-          key = {post.id}
-          userName={post.userName}
-          imageURL={post.imageURL}
-          caption={post.caption}
+      <div className="main__body">
+
+      <div className="app__post">
+        {posts.map(({ id, post }) => (
+          <Post
+            key={id}
+            userName={post.userName}
+            user={user}
+            postId={id}
+            imageURL={post.imageURL}
+            caption={post.caption}
+          />
+        ))}
+      </div>
+      <div className="instagram__embed">
+        <InstagramEmbed
+          url="https://www.instagram.com/p/CUbHfhpswxt/"
+          width={328}
         />
-        
-      ))}
-</div>
-
-
-
-{user && user.displayName ? (
+      </div>
+      </div>
+      
+      {user && user.displayName ? (
         <ImageUpload userName={user.displayName} />
       ) : (
         <h3> Login to Upload</h3>
       )}
-
     </div>
   );
 }
