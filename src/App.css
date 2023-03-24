@@ -10,9 +10,18 @@
   background-color: white;
   object-fit: contain;
   margin-bottom: 1px solid lightgrey;
+  display: flex;
+  justify-content: space-between;
 }
 
+.app_headerImage{
+  object-fit: contain;
+}
 .app__signup{
   display: flex;
   flex-direction: column;
+}
+
+.app__post{
+  padding: 20px;
 }

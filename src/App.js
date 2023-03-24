@@ -5,6 +5,8 @@ import { db, auth } from "./Firebase";
 import Modal from "@mui/material/Modal";
 import { Button, Input } from "@mui/material";
 import Box from "@mui/material/Box";
+import ImageUpload from "./Components/ImageUpload";
+
 
 const style = {
   position: "absolute",
@@ -53,16 +55,9 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         //user has logged in
-        console.log(authUser);
+        console.log(authUser,"logged in aditya");
         // This keeps you logged in even one refresh the page.
         setUser(authUser);
-        if (authUser.displayName) {
-          //Don't update username
-        } else {
-          return authUser.updateProfile({
-            displayName: userName,
-          });
-        }
       } else {
         setUser(null);
       }
@@ -71,7 +66,7 @@ function App() {
       // perform some cleanup option
       unsubscribe();
     };
-  }, [user, userName]);
+  }, []);
 
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
@@ -88,6 +83,12 @@ function App() {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        console.log(authUser)
+        return authUser.user.updateProfile({
+          displayName: userName,
+        });
+      })
       .catch((error) => {
         alert(error.message);
         setOpen(true);
@@ -106,6 +107,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
         <Box sx={style}>
           <form className="app__signup" action="">
@@ -170,9 +172,7 @@ function App() {
 
       <div className="app__header">
         <div className="app_headerImage">{insta_logo()}</div>
-      </div>
-
-      {user ? (
+        {user ? (
         <Button onClick={() => auth.signOut()}>Log Out</Button>
       ) : (
         <div className="app_loginContainer">
@@ -180,18 +180,31 @@ function App() {
           <Button onClick={() => setOpen(true)}>Sign Up</Button>
         </div>
       )}
+      </div>
 
+      
 
       {/* ---------------------Body-------------------------- */}
-
+<div className="app__post">
       {posts.map(({ id, post }) => (
         <Post
-          key={id}
+          key = {post.id}
           userName={post.userName}
           imageURL={post.imageURL}
           caption={post.caption}
         />
+        
       ))}
+</div>
+
+
+
+{user && user.displayName ? (
+        <ImageUpload userName={user.displayName} />
+      ) : (
+        <h3> Login to Upload</h3>
+      )}
+
     </div>
   );
 }
